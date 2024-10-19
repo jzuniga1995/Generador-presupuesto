@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramienta de Creación de Presupuestos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <!-- Agregar Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Herramienta de Creación de Presupuestos</h1>
+
+        <div class="budget-form">
+            <h2>Agregar Ingresos y Gastos</h2>
+            <input type="text" id="description" placeholder="Descripción">
+            <input type="number" id="amount" placeholder="Monto">
+            <select id="type">
+                <option value="income">Ingreso</option>
+                <option value="expense">Gasto</option>
+            </select>
+            <button onclick="addItem()"><i class="fas fa-plus-circle"></i> Agregar</button>
+        </div>
+
+        <div class="budget-summary">
+            <h2>Resumen del Presupuesto</h2>
+            <table>
+                <tr>
+                    <th>Ingresos</th>
+                    <th>Gastos</th>
+                    <th>Balance</th>
+                </tr>
+                <tr>
+                    <td>L. <span id="total-income">0.00</span></td>
+                    <td>L. <span id="total-expenses">0.00</span></td>
+                    <td>L. <span id="balance">0.00</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="items-list">
+            <h2>Detalles</h2>
+            <table id="items-table">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Monto</th>
+                        <th>Tipo</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="items"></tbody>
+            </table>
+            <div class="top-bar">
+                <button onclick="toggleDarkMode()" class="btn-dark-mode">
+                    <i class="fas fa-moon"></i> Modo Oscuro
+                </button>
+            </div>
+            
+            <!-- Botón para exportar a Excel con icono -->
+            <button onclick="exportToExcel()"><i class="fas fa-file-excel"></i> Exportar a Excel</button>
+        </div>
+
+        <div class="chart-container">
+            <h2>Gráfico de Distribución</h2>
+            <canvas id="budgetChart"></canvas>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
